@@ -1,0 +1,288 @@
+03.05 5:38 PM
+Bbb
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question</title>
+    <!-- Importing a romantic font -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #ff4d6d;
+            --bg-color: #fff0f3;
+            --text-color: #590d22;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1, h2 {
+            font-family: 'Dancing Script', cursive;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 3.5rem; color: var(--primary-color); }
+        h2 { font-size: 2.5rem; }
+        p { font-size: 1.2rem; line-height: 1.6; }
+
+        /* Button Styling */
+        .btn-group {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            height: 60px; /* Space for buttons */
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .btn-yes {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-no {
+            background-color: #e0e0e0;
+            color: #555;
+            position: absolute; /* Allows movement */
+        }
+
+        /* Photo Gallery Styling */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid var(--bg-color);
+        }
+
+        /* Sections Logic */
+        .section {
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Floating Hearts Background */
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 77, 109, 0.3);
+            transform: rotate(45deg);
+            animation: float 6s infinite linear;
+        }
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: inherit;
+            border-radius: 50%;
+        }
+        .heart::before { top: -20px; left: 0; }
+        .heart::after { left: -20px; top: 0; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Animation -->
+    <div class="hearts" id="hearts-container"></div>
+
+    <div class="container">
+        
+        <!-- SECTION 1: Intro -->
+        <div id="section-1" class="section active">
+            <h1>Hey Beautiful...</h1>
+            <p>I have a very important question to ask you.</p>
+            <p>But first, I wanted to take a moment to remember some of our favorite memories.</p>
+            <button class="btn-yes" onclick="nextSection(2)">Continue &rarr;</button>
+        </div>
+
+        <!-- SECTION 2: Photos (Replace src with your images) -->
+        <div id="section-2" class="section">
+            <h2>Our Memories</h2>
+            <div class="photo-grid">
+                <!-- PLACEHOLDER IMAGES - REPLACE THESE LINKS -->
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400" alt="Memory 1">
+                <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400" alt="Memory 2">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400" alt="Memory 3">
+                <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=400" alt="Memory 4">
+            </div>
+            <p>Every moment with you is my favorite.</p>
+            <button class="btn-yes" onclick="nextSection(3)">One last thing... &rarr;</button>
+        </div>
+
+        <!-- SECTION 3: The Proposal -->
+        <div id="section-3" class="section">
+            <h1>Will you marry me?</h1>
+            <p>I want to spend the rest of my life making you happy.</p>
+            <div class="btn-group">
+                <button class="btn-yes" onclick="sayYes()">YES!</button>
+                <button class="btn-no" id="btn-no" onmouseover="moveButton()" onclick="moveButton()">No</button>
+            </div>
+        </div>
+
+        <!-- SECTION 4: Success -->
+        <div id="section-4" class="section">
+            <h1>She Said Yes! </h1>
+            <p>I love you more than words can say. You are my best friend and my soulmate.</p>
+            <p>Let's start our forever.</p>
+            <div style="font-size: 4rem;">❤️</div>
+        </div>
+
+    </div>
+
+    <script>
+        // Function to switch between sections
+        function nextSection(sectionNumber) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+            // Show the target section
+            document.getElementById('section-' + sectionNumber).classList.add('active');
+        }
+
+        // Function to make the "No" button run away
+        function moveButton() {
+            const btnNo = document.getElementById('btn-no');
+            const container = document.querySelector('.container');
+            
+            // Get container dimensions
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = btnNo.getBoundingClientRect();
+
+            // Calculate random position within the container
+            // We subtract button size to keep it inside
+            const maxX = containerRect.width - btnRect.width - 20;
+            const maxY = containerRect.height - btnRect.height - 20;
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            // Apply new position
+            btnNo.style.position = 'absolute';
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+        }
+
+        // Function for the "Yes" click
+        function sayYes() {
+            nextSection(4);
+            launchConfetti();
+        }
+
+        // Confetti Effect
+        function launchConfetti() {
+            var duration = 3 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                var particleCount = 50 * (timeLeft / duration);
+                // since particles fall down, start a bit higher than random
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+
+        // Create floating hearts background
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            for(let i=0; i<15; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                heart.style.opacity = Math.random();
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+    </script>
+</body>
+</html>
